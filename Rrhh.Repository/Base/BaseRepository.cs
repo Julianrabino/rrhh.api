@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rrhh.Model.Base;
+using Rrhh.Repository.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,44 +13,36 @@ namespace Rrhh.Repository.Base
         protected IDbContext<TEntity> DbContext { get; set; }
 
         public TEntity Add(TEntity entity)
-        {            
-            //this.DbContext.Database.OpenConnection();
+        {
             var result = this.DbContext.Add(entity);
             this.DbContext.SaveChanges();
-            //this.DbContext.Database.CloseConnection();
             return result;
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            //this.DbContext.Database.OpenConnection();
             var productos = this.DbContext.GetAll();
-            //this.DbContext.Database.CloseConnection();
             return productos;
         }
 
         public TEntity Get(int id)
         {
-            //this.DbContext.Database.OpenConnection();
             var result = this.DbContext.DbSet.Find(id);
-            //this.DbContext.Database.CloseConnection();
+            if (result == null)
+                throw new RepositoryException(string.Format("No existe la entidad ({0}) para el identificador {1}", typeof(TEntity).Name, id.ToString()));
             return result;
         }
 
         public void Delete(TEntity entity)
         {
-            //this.DbContext.Database.OpenConnection();
             this.DbContext.Remove(entity);
             this.DbContext.SaveChanges();
-            //this.DbContext.Database.CloseConnection();
         }
 
         public TEntity Update(TEntity entity)
         {
-            //this.DbContext.Database.OpenConnection();
             var result = this.DbContext.Update(entity);
             this.DbContext.SaveChanges();
-            //this.DbContext.Database.CloseConnection();
             return result;
         }
     }
