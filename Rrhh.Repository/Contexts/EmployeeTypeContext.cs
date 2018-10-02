@@ -12,8 +12,6 @@ namespace Rrhh.Repository.Contexts
         {
         }
 
-        //public DbSet<ProductType> ProductTypes { get; set; }
-
         public DbSet<EmployeeType> DbSet { get; set; }
 
         public EmployeeType Add(EmployeeType entity)

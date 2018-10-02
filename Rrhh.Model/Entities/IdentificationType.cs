@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rrhh.Model.Entities
 {
-    [Table("employeetype")]
-    public class EmployeeType : IEntity
+    [Table("identificationtype")]
+    public class IdentificationType : IEntity
     {
         public int Id { get; set; }
 

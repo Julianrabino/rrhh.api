@@ -14,12 +14,18 @@ namespace Rrhh.Api.Controllers
     {
         private readonly EmployeeService service;
         private readonly EmployeeTypeService employeeTypeService;
+        private readonly IdentificationTypeService identificationTypeService;
         private readonly IMapper mapper;
 
-        public EmployeeController(EmployeeService service, EmployeeTypeService productTypeService, IMapper mapper)
+        public EmployeeController(
+            EmployeeService service, 
+            EmployeeTypeService productTypeService,
+            IdentificationTypeService identificationTypeService,
+            IMapper mapper)
         {
             this.service = service;
             this.employeeTypeService = productTypeService;
+            this.identificationTypeService = identificationTypeService;
             this.mapper = mapper;
         }
 
@@ -41,8 +47,10 @@ namespace Rrhh.Api.Controllers
         [HttpPost]
         public void Post([FromBody] EmployeeDTO value)
         {
+            TryValidateModel(value);
             var employee = this.mapper.Map<Employee>(value);
             employee.EmployeeType = this.employeeTypeService.Get(value.EmployeeTypeId);
+            employee.IdentificationType = this.identificationTypeService.Get(value.IdentificationTypeId.Value);
             this.service.Create(employee);
         }
 
@@ -51,9 +59,11 @@ namespace Rrhh.Api.Controllers
         public void Put(int id, [FromBody] EmployeeDTO value)
         {
             var employee = this.service.Get(id);
+            TryValidateModel(value);
             this.mapper.Map<EmployeeDTO, Employee>(value, employee);
             employee.EmployeeType = this.employeeTypeService.Get(value.EmployeeTypeId);
-            this.service.Update(employee);
+            employee.IdentificationType = this.identificationTypeService.Get(value.IdentificationTypeId.Value);
+            this.service.Update(employee);                   
         }
 
         // DELETE /employee/{id}

@@ -17,6 +17,7 @@ namespace Rrhh.Repository.Contexts
         public Employee Add(Employee entity)
         {
             this.Entry(entity.EmployeeType).State = EntityState.Unchanged;
+            this.Entry(entity.IdentificationType).State = EntityState.Unchanged;
             return base.Add(entity).Entity;
         }
 
@@ -28,12 +29,14 @@ namespace Rrhh.Repository.Contexts
         public void Remove(Employee entity)
         {
             this.Entry(entity.EmployeeType).State = EntityState.Unchanged;
+            this.Entry(entity.IdentificationType).State = EntityState.Unchanged;
             base.Remove(entity);
         }
 
         public Employee Update(Employee entity)
         {
             this.Entry(entity.EmployeeType).State = EntityState.Unchanged;
+            this.Entry(entity.IdentificationType).State = EntityState.Unchanged;
             return base.Update(entity).Entity;
         }
     }

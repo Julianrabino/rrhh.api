@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Rrhh.Model.Entities
 {
     [Table("employee")]
-    public class Employee: IEntity
+    public class Employee : IEntity
     {
         public int Id { get; set; }
 
@@ -18,5 +18,7 @@ namespace Rrhh.Model.Entities
 
         //[ForeignKey("EmployeeTypeId")]
         public virtual EmployeeType EmployeeType { get; set; }
+
+        public virtual IdentificationType IdentificationType { get; set; }
     }
 }

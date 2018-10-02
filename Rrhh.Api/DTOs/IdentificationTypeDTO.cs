@@ -2,7 +2,7 @@
 
 namespace Rrhh.Api.DTOs
 {
-    public class EmployeeTypeDTO
+    public class IdentificationTypeDTO
     {
         public int Id { get; set; }
 

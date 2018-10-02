@@ -39,6 +39,7 @@ namespace Rrhh.Api.Controllers
         [HttpPost]
         public void Post([FromBody] EmployeeTypeDTO value)
         {
+            TryValidateModel(value);
             this.service.Create(this.mapper.Map<EmployeeType>(value));
         }
 
@@ -47,6 +48,7 @@ namespace Rrhh.Api.Controllers
         public void Put(int id, [FromBody] EmployeeTypeDTO value)
         {
             var employeeType = this.service.Get(id);
+            TryValidateModel(value);
             this.mapper.Map<EmployeeTypeDTO, EmployeeType>(value, employeeType);
             this.service.Update(employeeType);
         }

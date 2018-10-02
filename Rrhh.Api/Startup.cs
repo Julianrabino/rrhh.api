@@ -16,6 +16,7 @@ using Rrhh.Api.Exceptions;
 using Rrhh.AppService.Services;
 using Rrhh.Repository.Contexts;
 using Rrhh.Repository.Repositories;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Rrhh.Api
 {
@@ -34,8 +35,10 @@ namespace Rrhh.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<EmployeeService>();
             services.AddTransient<EmployeeTypeService>();
+            services.AddTransient<IdentificationTypeService>();
             services.AddTransient<EmployeeRepository>();
             services.AddTransient<EmployeeTypeRepository>();
+            services.AddTransient<IdentificationTypeRepository>();
             services.AddDbContext<EmployeeContext>(options =>
                 options
                 .UseLazyLoadingProxies()
@@ -44,6 +47,16 @@ namespace Rrhh.Api
                 options
                 .UseLazyLoadingProxies()
                 .UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IdentificationTypeContext>(options =>
+                options
+                .UseLazyLoadingProxies()
+                .UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "RRHH API", Version = "v1" });
+            });
 
             services.AddAutoMapper();
         }
@@ -72,6 +85,19 @@ namespace Rrhh.Api
             }
 
             loggerFactory.AddConsole();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RRHH API V1");
+                c.RoutePrefix = "docs";
+            });
+
+
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
             app.UseMvc();
         }
