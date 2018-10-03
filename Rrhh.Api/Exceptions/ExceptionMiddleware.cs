@@ -39,7 +39,7 @@ namespace Rrhh.Api.Exceptions
         private static Task HandleRepositoryExceptionAsync(HttpContext context, RepositoryException exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            context.Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
 
             return context.Response.WriteAsync(new ErrorDetails()
             {
@@ -54,10 +54,10 @@ namespace Rrhh.Api.Exceptions
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             return context.Response.WriteAsync(new ErrorDetails()
-                {
-                    StatusCode = context.Response.StatusCode,
-                    Message = "Internal Server Error"
-                }.ToString());
+            {
+                StatusCode = context.Response.StatusCode,
+                Message = "Internal Server Error"
+            }.ToString());
         }
     }
 }

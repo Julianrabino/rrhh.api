@@ -9,6 +9,11 @@ namespace Rrhh.AppService.Base
     {
         protected IRepository<TEntity> Repository { get; set; }
 
+        public BaseService(IRepository<TEntity> repository)
+        {
+            this.Repository = repository;
+        }        
+
         public TEntity Create(TEntity entity)
         {
             return this.Repository.Add(entity);

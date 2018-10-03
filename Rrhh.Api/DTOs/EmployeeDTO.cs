@@ -18,7 +18,7 @@ namespace Rrhh.Api.DTOs
         public string Password { get; set; }
 
         [Required]
-        public int EmployeeTypeId { get; set; }
+        public int? EmployeeTypeId { get; set; }
 
         public string EmployeeTypeDesc { get; set; }
 
@@ -26,5 +26,8 @@ namespace Rrhh.Api.DTOs
         public int? IdentificationTypeId { get; set; }
 
         public string IdentificationTypeDesc { get; set; }
+
+        [Required]
+        public int? IdentificationNumber { get; set; }
     }
 }

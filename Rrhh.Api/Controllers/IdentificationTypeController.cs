@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace Rrhh.Api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/identificationtype")]
     [ApiController]
     public class IdentificationTypeController : ControllerBase
@@ -21,21 +22,31 @@ namespace Rrhh.Api.Controllers
             this.mapper = mapper;
         }
 
-        // GET /identificationtype
+        /// <summary>
+        /// Permite recuperar todas entidades
+        /// </summary>
+        /// <returns>Una colección de entidades</returns>
         [HttpGet]
         public ActionResult<IEnumerable<IdentificationTypeDTO>> Get()
         {
             return this.mapper.Map<IEnumerable<IdentificationTypeDTO>>(this.service.GetAll()).ToList();
         }
 
-        // GET /identificationtype/{id}
+        /// <summary>
+        /// Permite recuperar una entidad mediante un identificador
+        /// </summary>
+        /// <param name="id">Identificador de la entidad a recuperar</param>
+        /// <returns>Una entidad</returns>
         [HttpGet("{id}")]
         public ActionResult<IdentificationTypeDTO> Get(int id)
         {
             return this.mapper.Map<IdentificationTypeDTO>(this.service.Get(id));
         }
 
-        // POST
+        /// <summary>
+        /// Permite crear una nueva entidad
+        /// </summary>
+        /// <param name="value">Una entidad</param>
         [HttpPost]
         public void Post([FromBody] IdentificationTypeDTO value)
         {
@@ -43,7 +54,11 @@ namespace Rrhh.Api.Controllers
             this.service.Create(this.mapper.Map<IdentificationType>(value));
         }
 
-        // PUT  /identificationtype/{id}
+        /// <summary>
+        /// Permite editar una entidad
+        /// </summary>
+        /// <param name="id">Identificador de la entidad a editar</param>
+        /// <param name="value">Una entidad con los nuevos datos</param>
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] IdentificationTypeDTO value)
         {
@@ -53,7 +68,10 @@ namespace Rrhh.Api.Controllers
             this.service.Update(identificationType);
         }
 
-        // DELETE /identificationtype/{id}
+        /// <summary>
+        /// Permite borrar una entidad
+        /// </summary>
+        /// <param name="id">Identificador de la entidad a borrar</param>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

@@ -20,5 +20,7 @@ namespace Rrhh.Model.Entities
         public virtual EmployeeType EmployeeType { get; set; }
 
         public virtual IdentificationType IdentificationType { get; set; }
+
+        public int IdentificationNumber { get; set; }
     }
 }

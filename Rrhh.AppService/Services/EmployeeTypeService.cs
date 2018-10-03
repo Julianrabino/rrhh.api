@@ -7,8 +7,8 @@ namespace Rrhh.AppService.Services
     public class EmployeeTypeService: BaseService<EmployeeType>
     {                
         public EmployeeTypeService(EmployeeTypeRepository repository)
+            : base(repository)
         {
-            this.Repository = repository;
         }
     }
 }

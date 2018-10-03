@@ -7,8 +7,8 @@ namespace Rrhh.AppService.Services
     public class IdentificationTypeService : BaseService<IdentificationType>
     {                
         public IdentificationTypeService(IdentificationTypeRepository repository)
+            : base(repository)
         {
-            this.Repository = repository;
         }
     }
 }

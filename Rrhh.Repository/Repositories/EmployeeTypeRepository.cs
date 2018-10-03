@@ -7,8 +7,8 @@ namespace Rrhh.Repository.Repositories
     public class EmployeeTypeRepository: BaseRepository<EmployeeType>
     {
         public EmployeeTypeRepository(EmployeeTypeContext dbContext)
+            : base(dbContext)
         {
-            this.DbContext = dbContext;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace Rrhh.Api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/employeetype")]
     [ApiController]
     public class EmployeeTypeController : ControllerBase
@@ -21,21 +22,31 @@ namespace Rrhh.Api.Controllers
             this.mapper = mapper;
         }
 
-        // GET /employeetype
+        /// <summary>
+        /// Permite recuperar todas entidades
+        /// </summary>
+        /// <returns>Una colección de entidades</returns>
         [HttpGet]
         public ActionResult<IEnumerable<EmployeeTypeDTO>> Get()
         {
             return this.mapper.Map<IEnumerable<EmployeeTypeDTO>>(this.service.GetAll()).ToList();
         }
 
-        // GET /employeetype/{id}
+        /// <summary>
+        /// Permite recuperar una entidad mediante un identificador
+        /// </summary>
+        /// <param name="id">Identificador de la entidad a recuperar</param>
+        /// <returns>Una entidad</returns>
         [HttpGet("{id}")]
         public ActionResult<EmployeeTypeDTO> Get(int id)
         {
             return this.mapper.Map<EmployeeTypeDTO>(this.service.Get(id));
         }
 
-        // POST
+        /// <summary>
+        /// Permite crear una nueva entidad
+        /// </summary>
+        /// <param name="value">Una entidad</param>
         [HttpPost]
         public void Post([FromBody] EmployeeTypeDTO value)
         {
@@ -43,7 +54,11 @@ namespace Rrhh.Api.Controllers
             this.service.Create(this.mapper.Map<EmployeeType>(value));
         }
 
-        // PUT  /employeetype/{id}
+        /// <summary>
+        /// Permite editar una entidad
+        /// </summary>
+        /// <param name="id">Identificador de la entidad a editar</param>
+        /// <param name="value">Una entidad con los nuevos datos</param>
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] EmployeeTypeDTO value)
         {
@@ -53,7 +68,10 @@ namespace Rrhh.Api.Controllers
             this.service.Update(employeeType);
         }
 
-        // DELETE /employeetype/{id}
+        /// <summary>
+        /// Permite borrar una entidad
+        /// </summary>
+        /// <param name="id">Identificador de la entidad a borrar</param>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

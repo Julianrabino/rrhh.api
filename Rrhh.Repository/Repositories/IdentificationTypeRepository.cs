@@ -7,8 +7,8 @@ namespace Rrhh.Repository.Repositories
     public class IdentificationTypeRepository : BaseRepository<IdentificationType>
     {
         public IdentificationTypeRepository(IdentificationTypeContext dbContext)
+            : base(dbContext)
         {
-            this.DbContext = dbContext;
         }
     }
 }
