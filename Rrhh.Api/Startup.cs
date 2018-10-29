@@ -84,7 +84,7 @@ namespace Rrhh.Api
             else
             {
                 app.UseExceptionMiddleware();
-                app.UseExceptionHandler();
+                //app.UseExceptionHandler();
             }
 
             loggerFactory.AddConsole();
