@@ -99,9 +99,9 @@ namespace Rrhh.Api.Controllers
         /// <param name="identificationNumber">Número de identificación</param>
         /// <returns></returns>
         [HttpGet("existe/{identificationTypeId}/{identificationNumber}")]
-        public ActionResult<bool> Existe(int identificationTypeId, int identificationNumber)
+        public ActionResult<GenericResultDTO<bool>> Existe(int identificationTypeId, int identificationNumber)
         {
-            return this.service.Existe(identificationTypeId, identificationNumber);
+            return new GenericResultDTO<bool>(this.service.Existe(identificationTypeId, identificationNumber));
         }
     }
 }
